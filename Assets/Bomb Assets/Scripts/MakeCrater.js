@@ -23,8 +23,8 @@ function Start () {
 	// Store original terrain heightmap...can't seem to create an arbitary built-in 2D array in Javascript, so do it this way instead
 	heightmap = new float[terrain.heightmapWidth * terrain.heightmapHeight];
 	var tData = terrain.GetHeights(0, 0, terrain.heightmapWidth, terrain.heightmapHeight);
-	for (i = 0; i < terrain.heightmapHeight; i++) {
-		for (j = 0; j < terrain.heightmapWidth; j++) {
+	for (var i = 0; i < terrain.heightmapHeight; i++) {
+		for (var j = 0; j < terrain.heightmapWidth; j++) {
 			heightmap[i*terrain.heightmapWidth + j] = tData[i,j];
 		}
 	}
@@ -33,8 +33,8 @@ function Start () {
 function OnApplicationQuit () {
 	// Restore original terrain heightmap...again, this is a lot more annoying than it should be because of the built-in 2D array problem
 	var tData = terrain.GetHeights(0, 0, terrain.heightmapWidth, terrain.heightmapHeight);
-	for (i = 0; i < terrain.heightmapHeight; i++) {
-		for (j = 0; j < terrain.heightmapWidth; j++) {
+	for (var i = 0; i < terrain.heightmapHeight; i++) {
+		for (var j = 0; j < terrain.heightmapWidth; j++) {
 			tData[i,j] = heightmap[i*terrain.heightmapWidth + j];
 		}
 	}
@@ -44,8 +44,8 @@ function Reset()
 {
 	// Restore original terrain heightmap...again, this is a lot more annoying than it should be because of the built-in 2D array problem
 	var tData = terrain.GetHeights(0, 0, terrain.heightmapWidth, terrain.heightmapHeight);
-	for (i = 0; i < terrain.heightmapHeight; i++) {
-		for (j = 0; j < terrain.heightmapWidth; j++) {
+	for (var i = 0; i < terrain.heightmapHeight; i++) {
+		for (var j = 0; j < terrain.heightmapWidth; j++) {
 			tData[i,j] = heightmap[i*terrain.heightmapWidth + j];
 		}
 	}
@@ -61,8 +61,8 @@ function BigCrater (hitX : float, hitZ : float) {
 	// Get terrain heightmap data from area surrounding hit point
 	var tData = terrain.GetHeights(x-Bigcrater.width/2, z-Bigcrater.height/2, Bigcrater.width, Bigcrater.height);
 	// Subtract crater from heightmap data
-	for (i = 0; i < Bigcrater.height; i++) {
-		for (j = 0; j < Bigcrater.width; j++) {
+	for (var i = 0; i < Bigcrater.height; i++) {
+		for (var j = 0; j < Bigcrater.width; j++) {
 			tData[i,j] = tData[i,j] - BigcraterData[i*Bigcrater.width + j].a;	// Can't do "tData -= craterData[]"; generates error
 		}
 	}
@@ -79,8 +79,8 @@ function Crater (hitX : float, hitZ : float) {
 	// Get terrain heightmap data from area surrounding hit point
 	var tData = terrain.GetHeights(x-crater.width/2, z-crater.height/2, crater.width, crater.height);
 	// Subtract crater from heightmap data
-	for (i = 0; i < crater.height; i++) {
-		for (j = 0; j < crater.width; j++) {
+	for (var i = 0; i < crater.height; i++) {
+		for (var j = 0; j < crater.width; j++) {
 			tData[i,j] = tData[i,j] - craterData[i*crater.width + j].a;	// Can't do "tData -= craterData[]"; generates error
 		}
 	}

@@ -42,7 +42,7 @@ function ScorchMark (hitX : float, hitZ : float) {
 	// Get pixels from background area that matches with splat area, and multiply them with splat pixels
 	var bgpix = tex.GetPixels(uvX, uvY, splat.width, splat.height);
 	if (Random.value < .5) {
-		for (i = 0; i < bgpix.Length; i++) {
+		for (var i = 0; i < bgpix.Length; i++) {
 			bgpix[i] *= splatTexArray[i];
 		}
 	}
