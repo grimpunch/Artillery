@@ -41,8 +41,8 @@ public class PlayerTankShoot : MonoBehaviour {
 			//DrumKickbackPosition
 			break;
 		}
-		ProgressBar.GetComponent<BuildCircleMesh>().endAngle = 0;
-		ProgressBar.GetComponent<AudioSource>().pitch = 0;
+		//ProgressBar.GetComponent<BuildCircleMesh>().endAngle = 0;
+		//ProgressBar.GetComponent<AudioSource>().pitch = 0;
 		
 	}
 	

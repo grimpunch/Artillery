@@ -3,6 +3,8 @@ using System.Collections;
 
 public class SpinTurrets : MonoBehaviour {
 
+	public float spinSpeed = -5.0f;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -10,6 +12,6 @@ public class SpinTurrets : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	transform.Rotate(Vector3.up,3*Time.deltaTime,Space.Self);
+	transform.Rotate(Vector3.up,spinSpeed*Time.deltaTime,Space.Self);
 	}
 }

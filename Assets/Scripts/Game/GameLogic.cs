@@ -84,7 +84,7 @@ public class GameLogic : MonoBehaviour {
 		BlueArty = GameObject.FindGameObjectWithTag("BlueArty");
 		
 		Water = GameObject.FindGameObjectWithTag("Water");
-		//TurnProgressBar.GetComponent<BuildCircleMesh>().startAngle = 0;
+
 		TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
 		NeutralGUI = GameObject.FindGameObjectWithTag("NeutralGUI");
 		RedHeightGUI = GameObject.FindGameObjectWithTag("RedHeightGUI");
@@ -106,7 +106,7 @@ public class GameLogic : MonoBehaviour {
 		RedArty.transform.rotation = RedSpawns[Random.Range(0,3)].transform.rotation;    
 		BlueArty.transform.rotation = BlueSpawns[Random.Range(0,3)].transform.rotation;
 		currentTurn = 0;
-		//Choose a player randomly to go first://///
+		//////Choose a player randomly to go first://///
 		if(currentTurn == 0){
 		if(Random.Range(0,10) > 5){playerTurn = PlayerTurnState.Blue;}
 		else{playerTurn = PlayerTurnState.Red;}
@@ -114,6 +114,8 @@ public class GameLogic : MonoBehaviour {
 		TurnTime = TurnTimeSET;
 		ExplosionEnded = false;
 		ShotFiredThisRound = false;
+
+
 		////////////////////////////////////////////
 	}
 	public void ExplosionEndedSet()
