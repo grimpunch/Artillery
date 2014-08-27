@@ -2,15 +2,17 @@ fileFormatVersion: 2
 guid: a7777a000bfb3bb41a3bfea9073e536d
 ModelImporter:
   serializedVersion: 16
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    4300000: Sphere
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 3
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -36,8 +38,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
-    normalImportMode: 0
+    splitTangentsAcrossUV: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0
@@ -53,6 +55,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 

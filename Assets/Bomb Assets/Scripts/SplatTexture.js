@@ -17,18 +17,6 @@ function OnApplicationQuit() {
 	Destroy(tex);
 }
 
-function Reset()
-{
-	GetComponent(Projector).material.SetTexture("_ShadowTex", blank);
-	Destroy(tex);
-	
-	tex = Instantiate(blank);
-	GetComponent(Projector).material.SetTexture("_ShadowTex", tex);
-	splatTexArray = splat.GetPixels();
-	projectorSize = GetComponent(Projector).orthoGraphicSize * 2;
-	tex.Apply();
-}
-
 function ScorchMark (hitX : float, hitZ : float) {
 	// Limit hit area to size of projector
 	hitX = Mathf.Clamp(hitX, 0, projectorSize);
@@ -49,8 +37,8 @@ function ScorchMark (hitX : float, hitZ : float) {
 	// Half the time, put the splat texture in upside-down & backwards just for more variety
 	else {
 		var count = splatTexArray.Length;
-		for (i = 0; i < bgpix.Length; i++) {
-			bgpix[i] *= splatTexArray[--count];
+		for (var e = 0; e < bgpix.Length; e++) {
+			bgpix[e] *= splatTexArray[--count];
 		}
 	}
 	// Write changed array back to main texture
