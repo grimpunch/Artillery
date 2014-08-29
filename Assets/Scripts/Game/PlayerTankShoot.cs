@@ -55,14 +55,14 @@ public class PlayerTankShoot : MonoBehaviour
     {
         //if(GameLogic.gameState == GameLogic.GameState.GamePlay && GameLogic.ShotFiredThisRound == false)
         //{//HACK To test firing
-        if((Input.GetButtonDown("Fire2")) && increasing != true) {
+        if((Input.GetButtonDown("Player2Fire")) && increasing != true) {
             increasing = true;
 //            ProgressBar.GetComponent<AudioSource>().Play();
 								
         }
         if(increasing == true && Time.timeScale > 0) {
             if(Velocity < VelocityMax) {
-                Velocity = Velocity + 1;
+                Velocity++;
             }
 //            ProgressBar.GetComponent<BuildCircleMesh>().endAngle = (Velocity / 0.279f);
 //            if(ProgressBar.GetComponent<AudioSource>().pitch < 4) {
@@ -70,6 +70,8 @@ public class PlayerTankShoot : MonoBehaviour
 //            }
 								
             if(Velocity == VelocityMax) {
+                Velocity = VelocityMax;
+                increasing = false;
                 //ProgressBar.GetComponent<BuildCircleMesh>().endAngle = 360;
             }
         }

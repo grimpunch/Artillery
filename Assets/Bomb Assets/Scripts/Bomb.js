@@ -10,7 +10,7 @@ function Start () {
 }
 
 function SetVelocity(velocity){
-    rigidbody.velocity = velocity;
+    rigidbody.AddForce(velocity,ForceMode.VelocityChange);
 }
 
 function OnCollisionEnter () {
