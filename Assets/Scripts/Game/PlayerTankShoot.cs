@@ -21,17 +21,15 @@ public class PlayerTankShoot : MonoBehaviour
     public enum PlayerControl
     {
         Red,
-        Blue}
-    ;
+        Blue
+    }
     public PlayerControl player;
 	
-	
-	
-
     // Use this for initialization
     void Start()
     {
         Velocity = 0;
+
 				
 //				switch (player) {
 //				case PlayerControl.Red:

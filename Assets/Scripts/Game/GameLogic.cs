@@ -8,26 +8,45 @@ public class GameLogic : MonoBehaviour
     public enum GameType
     {
         Head2Head,
-        HumanVsCPU}
-    ;
-    public GameType gametype;
+        HumanVsCPU
+    }
+
+    private static GameType gametype;
 		
     //GameState : Pre-Game settings , Game Play , Post Game wrap up.
     public enum GameState
     {
         PreGame,
         GamePlay,
-        PostGame}
-    ;
-    public static GameState gameState;
+        PostGame
+    }
+
+    private static GameState gamestate;
+    public static GameState gameState {
+        get {
+            return gamestate;
+        }
+        set {
+            gamestate = value;
+        }
+    }
 
     //PlayerTurnState : Whose turn is it? Red or Blue.
     public enum PlayerTurnState
     {
         Red,
-        Blue}
-    ;
-    public static PlayerTurnState playerTurn;
+        Blue
+    }
+
+    private PlayerTurnState playerTurn;
+    public PlayerTurnState playerTurnState {
+        get {
+            return playerTurn;
+        }
+        set {
+            playerTurn = value;
+        }
+    }
 	
     //MenuGUIControl
     public GUISkin GUISKIN;
@@ -107,16 +126,18 @@ public class GameLogic : MonoBehaviour
         RedWinsGUI = GameObject.FindGameObjectWithTag("REDWINSGUI");
         BlueWinsGUI = GameObject.FindGameObjectWithTag("BLUEWINSGUI");
 
-        BlueTurnTextGUI.guiText.enabled = false;
+        /*BlueTurnTextGUI.guiText.enabled = false;
         RedTurnTextGUI.guiText.enabled = false;
 		
         RedWinsGUI.guiTexture.enabled = false;
         BlueWinsGUI.guiTexture.enabled = false;
-		
+		*/
+        /*
         RedArty.transform.position = RedSpawns[Random.Range(0, 3)].transform.position;    
         BlueArty.transform.position = BlueSpawns[Random.Range(0, 3)].transform.position;
         RedArty.transform.rotation = RedSpawns[Random.Range(0, 3)].transform.rotation;    
         BlueArty.transform.rotation = BlueSpawns[Random.Range(0, 3)].transform.rotation;
+        */
         currentTurn = 0;
 
         //////Choose a player randomly to go first://///
@@ -146,7 +167,7 @@ public class GameLogic : MonoBehaviour
         case GameState.PreGame:
             {
                 GUI.skin = GUISKIN;
-                PreGameWindow = GUI.Window(0, PreGameWindow, PreGameWindowFunction, "Game Setup");
+                //PreGameWindow = GUI.Window(0, PreGameWindow, PreGameWindowFunction, "Game Setup");
                 break;
             }
         case GameState.GamePlay:
@@ -239,7 +260,7 @@ public class GameLogic : MonoBehaviour
     {
         GameLogic.gameState = GameState.PreGame;
         debuggamestateSetter = GameLogic.gameState;
-        //TurnProgressBar.GetComponent<BuildCircleMesh>().startAngle = 0;
+        TurnProgressBar.GetComponent<BuildCircleMesh>().startAngle = 0;
         TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
         RedArty.transform.position = RedSpawns[Random.Range(0, 3)].transform.position;    
         BlueArty.transform.position = BlueSpawns[Random.Range(0, 3)].transform.position;
@@ -283,8 +304,8 @@ public class GameLogic : MonoBehaviour
     void Update()
     {
         //debug setters ////////////////////
-        /*gameState = debuggamestateSetter;
-		playerTurn = debugplayerTurnSetter;*/
+        gameState = debuggamestateSetter;
+        playerTurn = debugplayerTurnSetter;
         ////////////////////////////////////
 		
         switch(gameState) {
@@ -292,10 +313,11 @@ public class GameLogic : MonoBehaviour
             {
                 TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.enabled = false;
                 TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
-                RedTurnTextGUI.guiText.enabled = false;
+                /*RedTurnTextGUI.guiText.enabled = false;
                 BlueTurnTextGUI.guiText.enabled = false;
                 RedHeightGUI.gameObject.active = false;
                 BlueHeightGUI.gameObject.active = false;
+                */
                 break;
             }
         case GameState.GamePlay:
@@ -350,31 +372,30 @@ public class GameLogic : MonoBehaviour
 			
 			
                 //GUIHEIGHT//
-                HeightAboveSeaLevelRed = RedArty.transform.position.y - Water.transform.position.y;
-                HeightAboveSeaLevelBlue = BlueArty.transform.position.y - Water.transform.position.y;
-                RedHeightGUI.gameObject.active = true;
-                BlueHeightGUI.gameObject.active = true;
+                //HeightAboveSeaLevelRed = RedArty.transform.position.y - Water.transform.position.y;
+                //HeightAboveSeaLevelBlue = BlueArty.transform.position.y - Water.transform.position.y;
+                //RedHeightGUI.gameObject.active = true;
+                //BlueHeightGUI.gameObject.active = true;
                 /////////////
 				
 				
                 //GUITurnIndicator//
                 if(playerTurn == PlayerTurnState.Red) {
                     TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.material.color = Color.red;
-                    RedTurnTextGUI.guiText.enabled = true;
-                    BlueTurnTextGUI.guiText.enabled = false;
+                    //RedTurnTextGUI.guiText.enabled = true;
+                    //BlueTurnTextGUI.guiText.enabled = false;
                 }
                 ;
                 if(playerTurn == PlayerTurnState.Blue) {
                     TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.material.color = Color.blue;
-                    RedTurnTextGUI.guiText.enabled = false;
-                    BlueTurnTextGUI.guiText.enabled = true;
+                    //RedTurnTextGUI.guiText.enabled = false;
+                    //BlueTurnTextGUI.guiText.enabled = true;
                 }
                 ;
                 //GUITURNTIMER//////
                 TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = true;
                 ////////////////////
-				
-				
+								
                 if(Input.GetKeyUp("escape")) {
                     if(Paused == false) {
                         Time.timeScale = 0;
@@ -397,7 +418,7 @@ public class GameLogic : MonoBehaviour
 					
                 }
                 if(Paused == false) {
-                    TurnProgressBar.GetComponent<BuildCircleMesh>().endAngle = (TurnTime * 6);
+                    TurnProgressBar.GetComponent<BuildCircleMesh>().endAngle = 360 * TurnTime / TurnTimeSET;                   // ----->
 					
                 }
                 break;
