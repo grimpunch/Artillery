@@ -102,6 +102,10 @@ public class GameLogic : MonoBehaviour
     public GameObject RedWinsGUI;
     public GameObject BlueWinsGUI;
 	
+    //Camera control
+    public GameObject RedCamera;
+    public GameObject BlueCamera;
+
     public string RedName;
     public string BlueName;
 	
@@ -114,7 +118,8 @@ public class GameLogic : MonoBehaviour
     {
         RedArty = GameObject.FindGameObjectWithTag("RedArty");
         BlueArty = GameObject.FindGameObjectWithTag("BlueArty");
-		
+        RedCamera = GameObject.Find("Red Camera");
+        BlueCamera = GameObject.Find("Blue Camera"); 
         Water = GameObject.FindGameObjectWithTag("Water");
 
         TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
@@ -153,6 +158,21 @@ public class GameLogic : MonoBehaviour
         ExplosionEnded = false;
         ShotFiredThisRound = false;
         ////////////////////////////////////////////
+    }
+
+    public void UpdatePlayerCameraState()
+    {
+
+        //Switching to Blue Player Camera
+        if(playerTurn == PlayerTurnState.Blue) {
+            BlueCamera.SetActive(true);
+            RedCamera.SetActive(false);
+        }
+        //Switching to Red Player Camera
+        if(playerTurn == PlayerTurnState.Red) {
+            BlueCamera.SetActive(false);
+            RedCamera.SetActive(true);
+        }
     }
 
     public void ExplosionEndedSet()
@@ -305,7 +325,7 @@ public class GameLogic : MonoBehaviour
     {
         //debug setters ////////////////////
         gameState = debuggamestateSetter;
-        playerTurn = debugplayerTurnSetter;
+        //playerTurn = debugplayerTurnSetter;
         ////////////////////////////////////
 		
         switch(gameState) {
@@ -329,8 +349,10 @@ public class GameLogic : MonoBehaviour
 				
                 if(ExplosionEnded == true && ShotFiredThisRound == true) {
                     if(playerTurn == PlayerTurnState.Red) {
+                        Debug.Log("blue turn now");
                         playerTurn = PlayerTurnState.Blue;
                     } else if(playerTurn == PlayerTurnState.Blue) {
+                        Debug.Log("Reds turn now");
                         playerTurn = PlayerTurnState.Red;
                     }
                     TurnTime = TurnTimeSET;
@@ -369,15 +391,12 @@ public class GameLogic : MonoBehaviour
 				
                 //////////////////////////////////////////
 				
-			
-			
                 //GUIHEIGHT//
                 //HeightAboveSeaLevelRed = RedArty.transform.position.y - Water.transform.position.y;
                 //HeightAboveSeaLevelBlue = BlueArty.transform.position.y - Water.transform.position.y;
                 //RedHeightGUI.gameObject.active = true;
                 //BlueHeightGUI.gameObject.active = true;
                 /////////////
-				
 				
                 //GUITurnIndicator//
                 if(playerTurn == PlayerTurnState.Red) {
