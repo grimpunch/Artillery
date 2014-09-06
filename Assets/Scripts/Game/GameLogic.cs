@@ -160,9 +160,26 @@ public class GameLogic : MonoBehaviour
         ////////////////////////////////////////////
     }
 
+    void SwitchPlayerTurn()
+    {
+        if(playerTurn == PlayerTurnState.Red) {
+            playerTurn = PlayerTurnState.Blue;
+        } else
+            if(playerTurn == PlayerTurnState.Blue) {
+            playerTurn = PlayerTurnState.Red;
+        } else {
+        }
+        TurnTime = TurnTimeSET;
+        currentTurn ++;
+        ShotFiredThisRound = false;
+        ExplosionEnded = false;
+        UpdatePlayerCameraState();
+    }
+
     public void UpdatePlayerCameraState()
     {
-
+        BlueCamera.SetActive(false);
+        RedCamera.SetActive(false);
         //Switching to Blue Player Camera
         if(playerTurn == PlayerTurnState.Blue) {
             BlueCamera.SetActive(true);
@@ -342,36 +359,13 @@ public class GameLogic : MonoBehaviour
             }
         case GameState.GamePlay:
             {
-			
-				
-				
                 //TurnManager//////////////////////////////
-				
                 if(ExplosionEnded == true && ShotFiredThisRound == true) {
-                    if(playerTurn == PlayerTurnState.Red) {
-                        Debug.Log("blue turn now");
-                        playerTurn = PlayerTurnState.Blue;
-                    } else if(playerTurn == PlayerTurnState.Blue) {
-                        Debug.Log("Reds turn now");
-                        playerTurn = PlayerTurnState.Red;
-                    }
-                    TurnTime = TurnTimeSET;
-                    currentTurn ++;
-                    ShotFiredThisRound = false;
-                    ExplosionEnded = false;
+                    SwitchPlayerTurn();
                 } else if(TurnTime > 0 && ShotFiredThisRound == false) {
                     TurnTime -= Time.deltaTime;
                 } else if(TurnTime <= 0 && ShotFiredThisRound == false) {
-                    if(playerTurn == PlayerTurnState.Red) {
-                        playerTurn = PlayerTurnState.Blue;
-                    }
-                    if(playerTurn == PlayerTurnState.Blue) {
-                        playerTurn = PlayerTurnState.Red;
-                    }
-                    TurnTime = TurnTimeSET;
-                    currentTurn ++;
-                    ShotFiredThisRound = false;
-                    ExplosionEnded = false;
+                    SwitchPlayerTurn();
                 }
                 ///////////////////////////////////////////
 				
