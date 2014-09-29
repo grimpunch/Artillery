@@ -38,8 +38,8 @@ public class GameLogic : MonoBehaviour
         Blue
     }
 
-    private PlayerTurnState playerTurn;
-    public PlayerTurnState playerTurnState {
+    private static PlayerTurnState playerTurn;
+    public static PlayerTurnState playerTurnState {
         get {
             return playerTurn;
         }
@@ -74,7 +74,7 @@ public class GameLogic : MonoBehaviour
     public GameObject Water;
 	
     //Turn
-    public GameObject TurnProgressBar;
+    //public GameObject TurnProgressBar;
     public float TurnTime;
     public float TurnTimeSET;
     public bool Paused = false;
@@ -122,7 +122,7 @@ public class GameLogic : MonoBehaviour
         BlueCamera = GameObject.Find("Blue Camera"); 
         Water = GameObject.FindGameObjectWithTag("Water");
 
-        TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
+        //TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
         NeutralGUI = GameObject.FindGameObjectWithTag("NeutralGUI");
         RedHeightGUI = GameObject.FindGameObjectWithTag("RedHeightGUI");
         BlueHeightGUI = GameObject.FindGameObjectWithTag("BlueHeightGUI");
@@ -297,8 +297,8 @@ public class GameLogic : MonoBehaviour
     {
         GameLogic.gameState = GameState.PreGame;
         debuggamestateSetter = GameLogic.gameState;
-        TurnProgressBar.GetComponent<BuildCircleMesh>().startAngle = 0;
-        TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
+        //TurnProgressBar.GetComponent<BuildCircleMesh>().startAngle = 0;
+        //TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
         RedArty.transform.position = RedSpawns[Random.Range(0, 3)].transform.position;    
         BlueArty.transform.position = BlueSpawns[Random.Range(0, 3)].transform.position;
         RedArty.transform.rotation = RedSpawns[Random.Range(0, 3)].transform.rotation;    
@@ -348,8 +348,8 @@ public class GameLogic : MonoBehaviour
         switch(gameState) {
         case GameState.PreGame:
             {
-                TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.enabled = false;
-                TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
+                //TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.enabled = false;
+                //TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
                 /*RedTurnTextGUI.guiText.enabled = false;
                 BlueTurnTextGUI.guiText.enabled = false;
                 RedHeightGUI.gameObject.active = false;
@@ -394,19 +394,19 @@ public class GameLogic : MonoBehaviour
 				
                 //GUITurnIndicator//
                 if(playerTurn == PlayerTurnState.Red) {
-                    TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.material.color = Color.red;
+                    //TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.material.color = Color.red;
                     //RedTurnTextGUI.guiText.enabled = true;
                     //BlueTurnTextGUI.guiText.enabled = false;
                 }
                 ;
                 if(playerTurn == PlayerTurnState.Blue) {
-                    TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.material.color = Color.blue;
+                    //TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.material.color = Color.blue;
                     //RedTurnTextGUI.guiText.enabled = false;
                     //BlueTurnTextGUI.guiText.enabled = true;
                 }
                 ;
                 //GUITURNTIMER//////
-                TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = true;
+                //TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = true;
                 ////////////////////
 								
                 if(Input.GetKeyUp("escape")) {
@@ -431,15 +431,15 @@ public class GameLogic : MonoBehaviour
 					
                 }
                 if(Paused == false) {
-                    TurnProgressBar.GetComponent<BuildCircleMesh>().endAngle = 360 * TurnTime / TurnTimeSET;                   // ----->
+                    //TurnProgressBar.GetComponent<BuildCircleMesh>().endAngle = 360 * TurnTime / TurnTimeSET;                   // ----->
 					
                 }
                 break;
             }
         case GameState.PostGame:
             {
-                TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.enabled = false;
-                TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
+                //TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.enabled = false;
+                //TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
                 RedTurnTextGUI.guiText.enabled = false;
                 BlueTurnTextGUI.guiText.enabled = false;
                 RedHeightGUI.gameObject.active = false;

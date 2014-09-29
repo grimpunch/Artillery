@@ -20,7 +20,7 @@ public class PlayerTankAngle : MonoBehaviour
     void Start()
     {
         player = gameObject.GetComponent<PlayerTankShoot>().player;
-        gamelogic = GameObject.Find("GameLogic").GetComponent<GameLogic>();
+
         if(player == PlayerTankShoot.PlayerControl.Red) {
             playerVerticalAxis = "Player1Vertical";
         }
@@ -33,7 +33,7 @@ public class PlayerTankAngle : MonoBehaviour
     void Update()
     {
         if(GameLogic.gameState == GameLogic.GameState.GamePlay) {
-            if(gamelogic.playerTurnState.ToString() == player.ToString()) {
+            if(GameLogic.playerTurnState.ToString() == player.ToString()) {
 
                 InputDirection.y = Input.GetAxis(playerVerticalAxis);
                 if(InputDirection.y > rotationInputEasing && YExtent < YMax) {

@@ -28,7 +28,7 @@ public class PlayerTankRotate : MonoBehaviour
     void Update()
     {
         if(GameLogic.gameState == GameLogic.GameState.GamePlay) {
-            if(gamelogic.playerTurnState.ToString() == player.ToString()) {
+            if(GameLogic.playerTurnState.ToString() == player.ToString()) {
 
                 InputDirection.x = Input.GetAxis(playerHorizontalAxis);
             

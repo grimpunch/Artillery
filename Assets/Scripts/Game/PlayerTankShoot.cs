@@ -29,71 +29,56 @@ public class PlayerTankShoot : MonoBehaviour
     void Start()
     {
         Velocity = 0;
-
-				
-//				switch (player) {
-//				case PlayerControl.Red:
-//						ProgressBar = GameObject.FindGameObjectWithTag ("RedProgress");
-//			//DrumPosition
-//			//DrumKickbackPosition
-//						break;
-//				case PlayerControl.Blue:
-//						ProgressBar = GameObject.FindGameObjectWithTag ("BlueProgress");
-//			//DrumPosition 
-//			//DrumKickbackPosition
-//						break;
-//				}
-        //ProgressBar.GetComponent<BuildCircleMesh>().endAngle = 0;
         //ProgressBar.GetComponent<AudioSource>().pitch = 0;
-		
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(GameLogic.gameState == GameLogic.GameState.GamePlay && GameLogic.ShotFiredThisRound == false)
-        //{//HACK To test firing
-        if((Input.GetButtonDown("Player2Fire")) && increasing != true) {
-            increasing = true;
+        Debug.Log("Player Turn : " + GameLogic.playerTurnState.ToString());
+        Debug.Log("Player owning tank : " + player.ToString());
+        if(GameLogic.gameState == GameLogic.GameState.GamePlay && GameLogic.playerTurnState.ToString() == player.ToString() && GameLogic.ShotFiredThisRound == false) {
+            if((Input.GetButtonDown("Player2Fire")) && increasing != true) {
+                increasing = true;
 //            ProgressBar.GetComponent<AudioSource>().Play();
 								
-        }
-        if(increasing == true && Time.timeScale > 0) {
-            if(Velocity < VelocityMax) {
-                Velocity++;
             }
+            if(increasing == true && Time.timeScale > 0) {
+                if(Velocity < VelocityMax) {
+                    Velocity++;
+                }
 //            ProgressBar.GetComponent<BuildCircleMesh>().endAngle = (Velocity / 0.279f);
 //            if(ProgressBar.GetComponent<AudioSource>().pitch < 4) {
 //                ProgressBar.GetComponent<AudioSource>().pitch += 0.04f;
 //            }
 								
-            if(Velocity == VelocityMax) {
-                Velocity = VelocityMax;
-                increasing = false;
-                //ProgressBar.GetComponent<BuildCircleMesh>().endAngle = 360;
+                if(Velocity == VelocityMax) {
+                    Velocity = VelocityMax;
+                    increasing = false;
+                    //ProgressBar.GetComponent<BuildCircleMesh>().endAngle = 360;
+                }
             }
-        }
-        if(Input.GetButtonUp("Player2Fire")) {
-            increasing = false;
-            //GameLogic.ShotFiredThisRound = true;
-            //ProgressBar.GetComponent<BuildCircleMesh>().endAngle = 0;
-            Debug.DrawLine(Muzzle.transform.position, Muzzle.transform.position + Muzzle.transform.forward, Color.red);
-            GameObject projectile;
-            Vector3 muzzlevelocity = Muzzle.transform.forward;
+            if(Input.GetButtonUp("Player2Fire")) {
+                increasing = false;
+                //GameLogic.ShotFiredThisRound = true;
+                //ProgressBar.GetComponent<BuildCircleMesh>().endAngle = 0;
+                Debug.DrawLine(Muzzle.transform.position, Muzzle.transform.position + Muzzle.transform.forward, Color.red);
+                GameObject projectile;
+                Vector3 muzzlevelocity = Muzzle.transform.forward;
 					            
-            if(Inaccuracy != 0) {
-                Vector2 rand = Random.insideUnitCircle;
-                muzzlevelocity += new Vector3(rand.x, rand.y, 0) * Inaccuracy;
-            } 
-            muzzlevelocity = muzzlevelocity.normalized * Velocity;
-            projectile = Instantiate(Bombproj, Muzzle.transform.position, Quaternion.identity) as GameObject;
-            projectile.GetComponent("Bomb").SendMessage("SetVelocity", muzzlevelocity);
-            Velocity = 0;
-            //ProgressBar.GetComponent<AudioSource>().pitch = 0;
-            //ProgressBar.GetComponent<AudioSource>().Stop();
-            Drum.transform.position = DrumKickbackPosition.transform.position;
-        }
+                if(Inaccuracy != 0) {
+                    Vector2 rand = Random.insideUnitCircle;
+                    muzzlevelocity += new Vector3(rand.x, rand.y, 0) * Inaccuracy;
+                } 
+                muzzlevelocity = muzzlevelocity.normalized * Velocity;
+                projectile = Instantiate(Bombproj, Muzzle.transform.position, Quaternion.identity) as GameObject;
+                projectile.GetComponent("Bomb").SendMessage("SetVelocity", muzzlevelocity);
+                Velocity = 0;
+                //ProgressBar.GetComponent<AudioSource>().pitch = 0;
+                //ProgressBar.GetComponent<AudioSource>().Stop();
+                Drum.transform.position = DrumKickbackPosition.transform.position;
+            }
 								
-        //}
+        }
     }
 }
