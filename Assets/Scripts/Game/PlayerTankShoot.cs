@@ -35,8 +35,6 @@ public class PlayerTankShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Player Turn : " + GameLogic.playerTurnState.ToString());
-        Debug.Log("Player owning tank : " + player.ToString());
         if(GameLogic.gameState == GameLogic.GameState.GamePlay && GameLogic.playerTurnState.ToString() == player.ToString() && GameLogic.ShotFiredThisRound == false) {
             if((Input.GetButtonDown("Player2Fire")) && increasing != true) {
                 increasing = true;

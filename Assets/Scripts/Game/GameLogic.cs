@@ -108,6 +108,8 @@ public class GameLogic : MonoBehaviour
 
     public string RedName;
     public string BlueName;
+
+    public Canvas UICanvas;
 	
     //DEBUG ONLY Game State Changers for testing in inpector view
     public GameState debuggamestateSetter;
@@ -121,6 +123,7 @@ public class GameLogic : MonoBehaviour
         RedCamera = GameObject.Find("Red Camera");
         BlueCamera = GameObject.Find("Blue Camera"); 
         Water = GameObject.FindGameObjectWithTag("Water");
+        UICanvas = GameObject.Find("Canvas").GetComponent<Canvas>();
 
         //TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
         NeutralGUI = GameObject.FindGameObjectWithTag("NeutralGUI");
@@ -348,13 +351,10 @@ public class GameLogic : MonoBehaviour
         switch(gameState) {
         case GameState.PreGame:
             {
-                //TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.enabled = false;
-                //TurnProgressBar.GetComponent<BuildCircleMesh>().enabled = false;
-                /*RedTurnTextGUI.guiText.enabled = false;
-                BlueTurnTextGUI.guiText.enabled = false;
-                RedHeightGUI.gameObject.active = false;
-                BlueHeightGUI.gameObject.active = false;
-                */
+                //RedTurnTextGUI.guiText.enabled = false;
+                //BlueTurnTextGUI.guiText.enabled = false;
+                //RedHeightGUI.gameObject.active = false;
+                //BlueHeightGUI.gameObject.active = false;
                 break;
             }
         case GameState.GamePlay:
@@ -397,6 +397,7 @@ public class GameLogic : MonoBehaviour
                     //TurnProgressBar.GetComponent<BuildCircleMesh>().renderer.material.color = Color.red;
                     //RedTurnTextGUI.guiText.enabled = true;
                     //BlueTurnTextGUI.guiText.enabled = false;
+                    
                 }
                 ;
                 if(playerTurn == PlayerTurnState.Blue) {
